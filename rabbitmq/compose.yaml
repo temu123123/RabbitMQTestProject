@@ -1,0 +1,14 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"       # Порт для приложения RabbitMQ
+      - "15672:15672"     # Порт для веб-интерфейса
+    environment:
+      RABBITMQ_DEFAULT_USER: user      # Замените на желаемое имя пользователя
+      RABBITMQ_DEFAULT_PASS: password  # Замените на желаемый пароль
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq_data:
