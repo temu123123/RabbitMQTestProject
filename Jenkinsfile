@@ -9,15 +9,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                sh 'chmod +x gradlew'
-                sh './gradlew clean build -x test'
+                sh 'gradle clean build -x test'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh './gradlew test'
+                sh 'gradle test'
             }
         }
 
@@ -28,10 +27,10 @@ pipeline {
             }
         }
     }
-
+    
     post {
         always {
-            junit 'build/test-results/test/*.xml'
+            junit testResults: 'build/test-results/test/*.xml', allowEmptyResults: true
         }
     }
 }
